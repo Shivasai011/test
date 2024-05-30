@@ -51,7 +51,7 @@ resource "aws_instance" "first" {
   ami = "ami-0e001c9271cf7f3b9"
   subnet_id = "subnet-0100b3508f5cb942d"
   instance_type = "t3.small"
-  security_groups = [aws_security_group.test.name_prefix]
+  vpc_security_group_ids = [aws_security_group.test.name_prefix]
   tags = {
     Name = "Jenkins_master"
   }
@@ -61,7 +61,7 @@ resource "aws_instance" "second" {
     ami = "ami-0e001c9271cf7f3b9"
     subnet_id = "subnet-0100b3508f5cb942d"
     instance_type = "t2.medium"
-    security_groups = [aws_security_group.test.name_prefix]
+    vpc_security_group_ids = [aws_security_group.test.name_prefix]
     tags = {
         Name = "Jenkins_Slave"
     }
@@ -71,7 +71,7 @@ resource "aws_instance" "third" {
     ami = "ami-0e001c9271cf7f3b9"
     subnet_id = "subnet-0100b3508f5cb942d"
     instance_type = "t2.medium"
-    security_groups = [aws_security_group.test.name_prefix]
+    vpc_security_group_ids = [aws_security_group.test.name_prefix]
     tags = {
         Name = "Sonarqube"
     }
@@ -81,7 +81,7 @@ resource "aws_instance" "fourth" {
     ami = "ami-0e001c9271cf7f3b9"
     subnet_id = "subnet-0100b3508f5cb942d"
     instance_type = "t2.medium"
-    security_groups = [aws_security_group.test.name_prefix]
+    vpc_security_group_ids = [aws_security_group.test.name_prefix]
     tags = {
         Name = "Nexus"
     }
@@ -91,7 +91,7 @@ resource "aws_instance" "fifth" {
     ami = "ami-0e001c9271cf7f3b9"
     subnet_id = "subnet-0100b3508f5cb942d"
     instance_type = "t2.medium"
-    security_groups = [aws_security_group.test.name_prefix]
+    vpc_security_group_ids =  = [aws_security_group.test.name_prefix]
     tags = {
         Name = "EKS_MASTER"
     }
