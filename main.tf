@@ -91,7 +91,7 @@ resource "aws_instance" "fifth" {
     ami = "ami-0e001c9271cf7f3b9"
     subnet_id = "subnet-0100b3508f5cb942d"
     instance_type = "t2.medium"
-    vpc_security_group_ids =  = [aws_security_group.test.name_prefix]
+    vpc_security_group_ids = [aws_security_group.test.name_prefix]
     tags = {
         Name = "EKS_MASTER"
     }
