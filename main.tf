@@ -47,10 +47,26 @@ resource "aws_security_group" "test" {
     }
 }
 
+resource "aws_key_pair" "test_key" {
+    key_name = "test_key"
+    public_key = "tls_private_key.rsa.public_key_openssh"
+}
+
+resource "tls_private_key" "rsa" {
+    algorithm = "RSA"
+    rsa_bits = 4096
+}
+
+resource "local_file" "test_key" {
+  content = "tls_private_key.rsa.private_key_pem"
+  filename = "test_key.pem"
+}
+
 resource "aws_instance" "first" {
   ami = "ami-0e001c9271cf7f3b9"
   subnet_id = "subnet-0100b3508f5cb942d"
   instance_type = "t3.small"
+  key_name = "aws_key_pair.test_key.key_name"
   vpc_security_group_ids = [aws_security_group.test.id]
   tags = {
     Name = "Jenkins_master"
@@ -61,6 +77,7 @@ resource "aws_instance" "second" {
     ami = "ami-0e001c9271cf7f3b9"
     subnet_id = "subnet-0100b3508f5cb942d"
     instance_type = "t2.medium"
+    key_name = "aws_key_pair.test_key.key_name"
     vpc_security_group_ids = [aws_security_group.test.id]
     tags = {
         Name = "Jenkins_Slave"
@@ -71,6 +88,7 @@ resource "aws_instance" "third" {
     ami = "ami-0e001c9271cf7f3b9"
     subnet_id = "subnet-0100b3508f5cb942d"
     instance_type = "t2.medium"
+    key_name = "aws_key_pair.test_key.key_name"
     vpc_security_group_ids = [aws_security_group.test.id]
     tags = {
         Name = "Sonarqube"
@@ -81,6 +99,7 @@ resource "aws_instance" "fourth" {
     ami = "ami-0e001c9271cf7f3b9"
     subnet_id = "subnet-0100b3508f5cb942d"
     instance_type = "t2.medium"
+    key_name = "aws_key_pair.test_key.key_name"
     vpc_security_group_ids = [aws_security_group.test.id]
     tags = {
         Name = "Nexus"
@@ -91,6 +110,7 @@ resource "aws_instance" "fifth" {
     ami = "ami-0e001c9271cf7f3b9"
     subnet_id = "subnet-0100b3508f5cb942d"
     instance_type = "t2.medium"
+    key_name = "aws_key_pair.test_key.key_name"
     vpc_security_group_ids = [aws_security_group.test.id]
     tags = {
         Name = "EKS_MASTER"
